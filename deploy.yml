@@ -1,0 +1,29 @@
+---
+- hosts: all
+  vars:
+    dPath: /opt/tomcat/webapps
+    artiUrl: http://3.17.187.78:8081/repository
+    jobName: petclinic
+    warName: spring-framework-petclinic
+  tasks:
+  - name: list deploypath
+    shell: ls -1 {{ dPath }}
+    register: contents
+
+  - name: remove
+    file: 
+     path: "{{ dPath }}/{{ item }}"
+     state: absent
+    with_items: "{{ contents.stdout_lines }}"
+
+  - name: dowmload warfile in deploment path
+    get_url:
+      url: "{{ artiUrl }}/{{ jobName }}/org/springframework/samples/spring-framework-petclinic/{{ version }}/{{ warName }}-{{ version }}.war"
+      dest: /tmp
+      username: "{{ nexususer }}"
+      password: "{{ nexuspassword }}"
+      
+  - name: deploy file
+    copy: 
+      src: "/tmp/{{ warName }}-{{ version }}.war"
+      dest: "{{ dPath }}/{{ jobName }}.war"
