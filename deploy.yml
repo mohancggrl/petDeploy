@@ -25,6 +25,6 @@
       
   - name: deploy file
     copy: 
-      src: "/tmp/{{ warName }}-{{ version }}.war"
+      src: "/tmp/{{ IMAGE }}-{{ version }}.war"
       dest: "{{ dPath }}/{{ jobName }}.war"
       remote_src: yes
