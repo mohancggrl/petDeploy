@@ -4,7 +4,7 @@
     dPath: /opt/tomcat/webapps
     artiUrl: http://3.17.187.78:8081/repository
     jobName: petclinic
-    warName: spring-framework-petclinic
+    #warName: spring-framework-petclinic
   tasks:
   - name: list deploypath
     shell: ls -1 {{ dPath }}
@@ -18,7 +18,7 @@
 
   - name: dowmload warfile in deploment path
     get_url:
-      url: "{{ artiUrl }}/{{ jobName }}/org/springframework/samples/spring-framework-petclinic/{{ version }}/{{ warName }}-{{ version }}.war"
+      url: "{{ artiUrl }}/{{ jobName }}/org/springframework/samples/{{ IMAGE }}/{{ version }}/{{ IMAGE }}-{{ version }}.war"
       dest: /tmp
       username: "{{ nexususer }}"
       password: "{{ nexuspassword }}"
