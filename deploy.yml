@@ -27,3 +27,4 @@
     copy: 
       src: "/tmp/{{ warName }}-{{ version }}.war"
       dest: "{{ dPath }}/{{ jobName }}.war"
+      remote_src: yes
